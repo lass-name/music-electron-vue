@@ -81,6 +81,7 @@ export default {
       this.isPlay = !audio.paused
     },
     next () {
+      console.log(this.current_album_musics)
       let music = this.current_album_musics.tracks[this.current_album_musics.tracks.indexOf(this.current_play_muisc) + 1]
       if (music) {
         this.$store.dispatch('setCurrentPlayMuisc', music)
@@ -95,7 +96,7 @@ export default {
       }
     },
     getMusic (id) {
-      let obj = common(`/music/url?id=${id}`)
+      let obj = common(`/song/url?id=${id}`)
       this.$store.dispatch('setCurrentPlayMusicUrl', obj).then(({data}) => {
         console.log(data)
         // const notification = new window.Notification(`${this.current_play_muisc.name}`, {
@@ -175,7 +176,9 @@ export default {
       console.log(val)
 
       let myNotification = new Notification(val.name, {
-        body: `${val.album.artists[0].name}--${val.name}`
+        body: `${val.ar[0].name}--${val.name}`
+        // icon: `${val.album.artists[0].img1v1Url}`,
+        // closeButtonText: '关闭'
       })
       myNotification.onclick = () => {
         console.log('Notification clicked')
