@@ -77,6 +77,7 @@ export default {
     span{
       padding: 5px;
       display: inherit;
+      position: relative;
       &::before{
         content: '';
         position: absolute;
@@ -89,25 +90,28 @@ export default {
     }
   }
   .music-items-box{
-    justify-content: space-between;
+    // justify-content: space-between;
     align-content: space-between;
     flex-wrap: wrap;
     text-align: center;
     .m-list-item{
       width: 24%;
-      margin: 5px 0;
+      margin: 10px 0;
+      position: relative;
     }
     .play-count{
       position: relative;
       display: inline-block;
       color: #FFFFFF;
-      right: -60px+5px+5px;
-      top: 20px;
-      font-size: 20px;
+      right: 10px;//-60px+5px+5px;
+      top: 0px;
+      font-size: 15px;
+      position: absolute;
     }
     .play-text{
-      font-size: 14px;
+      font-size: 12px;
       font-weight: bold;
+      padding-right: 10px;
     }
     .cover-img{
       width: 85%;
