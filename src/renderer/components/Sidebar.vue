@@ -34,10 +34,10 @@
     </div>
     <div class="grop-blank"></div>
     <div class="play-card flex" v-if="playing.id">
-      <div class="album"><img :src="playing.album && playing.album.picUrl" alt="" class="album-image"></div>
+      <div class="album"><img :src="playing.al && playing.al.picUrl" alt="" class="album-image"></div>
       <div class="album-item grow-1">
         <div class="music-title">{{playing.name}}</div>
-        <div class="artauth">{{playing.artists[0].name}}</div>
+        <div class="artauth">{{playing.ar[0].name}}</div>
       </div>
       <div class="album-item">
         <div class="el-icon-delete"></div>
@@ -75,7 +75,8 @@ export default {
 @title-color:#767776;
 @border-color:#BEBFBE;
 .m-sidebar-box{
-  background-color: @background-color;
+  // background-color: @background-color;
+  border-right: 1px solid @background-color;
   height: 100%-10%;
   .group-container{
     height: 65%+20%;
