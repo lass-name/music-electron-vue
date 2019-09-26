@@ -47,9 +47,10 @@
         <el-tab-pane label="歌曲列表" name="first">
           <el-table :data="item.tracks" style="width: 100%" @row-dblclick="dbclickEvent" :row-class-name="selectedRow">
             <el-table-column label="" width="60" :formatter="playFormate">
-              <!-- <template slot-scope="scope"> -->
-                <!-- <i class="iconfont icon-volume"></i> -->
-              <!-- </template> -->
+              <template slot-scope="scope">
+                <i class="iconfont icon-volume-" v-show="playing.id===scope.row.id"></i>
+                <span v-show="playing.id!==scope.row.id">{{indexMethod(scope.$index)}}</span>
+              </template>
             </el-table-column>
             <el-table-column prop="date" label="操作" width="80">
               <template slot-scope="scope">
@@ -67,17 +68,19 @@
             </el-table-column>
             <el-table-column label="歌手" width="120">
               <template slot-scope="scope">
-                <span class="album-name">{{scope.row.album.artists[0].name}}</span>
+                <!-- <span class="album-name">{{scope.row.album.artists[0].name}}</span> -->
+                <span class="album-name">{{scope.row.ar[0].name}}</span>
               </template>
             </el-table-column>
             <el-table-column label="专辑" width="100">
               <template slot-scope="scope">
-                <span class="album-name">{{scope.row.album.name}}</span>
+                <!-- <span class="album-name">{{scope.row.album.name}}</span> -->
+                <span class="album-name">{{scope.row.al.name}}</span>
               </template>
             </el-table-column>
             <el-table-column label="时长" width="80">
               <template slot-scope="scope">
-                {{scope.row.duration | duration}}
+                {{scope.row.dt | duration}}
               </template>
             </el-table-column>
           </el-table>
@@ -115,18 +118,18 @@ export default {
       let obj = common(`/playlist/detail?id=${id}`)
       this.$store.dispatch('getAlbumMuisc', obj).then(({data}) => {
         console.log(data)
-        this.item = data.result
+        this.item = data.playlist
       })
     },
     indexMethod (index) {
       return String.prototype.padStart.apply(index + 1, [2, '0'])
     },
     playFormate (e, column, cell, index) {
-      if (this.playing.id === e.id) {
+      /* if (this.playing.id === e.id) {
         // return `<i class='iconfont icon-volume'></i>`
       } else {
         return String.prototype.padStart.apply(index + 1, [2, '0'])
-      }
+      } */
     },
     selectedRow ({row, rowIndex}) {
       // console.log(row, rowIndex)
@@ -138,7 +141,8 @@ export default {
       this.getMusic(e.id)
     },
     getMusic (id) {
-      let obj = common(`/music/url?id=${id}`)
+      // let obj = common(`/music/url?id=${id}`)
+      let obj = common(`/song/url?id=${id}`)
       this.$store.dispatch('setCurrentPlayMusicUrl', obj).then(({data}) => {
         console.log(data)
         // this.audioUrl = data.data[0].url

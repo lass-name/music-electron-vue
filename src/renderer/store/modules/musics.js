@@ -32,7 +32,7 @@ const actions = {
 
 const mutations = {
   [types.GET_ALBUMS_MUSICS] (state, {data}) {
-    state.current_album_musics = data.result
+    state.current_album_musics = data.playlist
   },
   [types.SET_CURRENT_MUSIC] (state, playload) {
     state.current_play_muisc = playload
