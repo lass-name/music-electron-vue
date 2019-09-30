@@ -5,7 +5,7 @@
         <div class="s-title">推荐</div>
         <ul class="ul">
           <li class="item active" @click="routerLinkTo('discover')"><i class="iconfont icon-music"></i> 发现音乐</li>
-          <li class="item"><i class="iconfont icon-radar"></i> 私人FM</li>
+          <li class="item" @click="checkUpdate"><i class="iconfont icon-radar"></i> 私人FM</li>
           <li class="item"><i class="iconfont icon-mv"></i> MV</li>
           <li class="item"><i class="iconfont icon-friend"></i> 朋友</li>
         </ul>
@@ -49,6 +49,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import { ipcRenderer } from 'electron'
 export default {
   name: 'sidebar',
   data () {
@@ -65,6 +66,9 @@ export default {
   methods: {
     routerLinkTo (name) {
       this.$router.push({name: name})
+    },
+    checkUpdate () {
+      ipcRenderer.send('checkForUpdate')
     }
   }
 }
